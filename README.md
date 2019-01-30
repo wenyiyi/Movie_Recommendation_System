@@ -7,6 +7,9 @@ https://github.com/wenyiyi/Movie_Recommendation_System/blob/master/img/result.JP
 项目后台效果图
 https://github.com/wenyiyi/Movie_Recommendation_System/blob/master/img/system.JPG
 
+项目系统架构图
+https://github.com/wenyiyi/Movie_Recommendation_System/blob/master/img/framework.JPG
+
 开发环境
 –Win8 64bit 
 –Java 1.8.0_101 
