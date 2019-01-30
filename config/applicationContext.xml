@@ -1,0 +1,69 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		    xmlns:aop="http://www.springframework.org/schema/aop"
+		    xmlns:context="http://www.springframework.org/schema/context"
+		    xmlns:tx="http://www.springframework.org/schema/tx"
+		    xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+		    ">
+	<!-- 开启spring注解编程，并扫描com包中的所有类及子包中的类。 -->
+	<context:component-scan base-package="com"/>
+	<!-- 注解配置定时器  -->  
+	<!-- <task:annotation-driven/> -->
+	
+	<!--在properties文件中读取资源信息-->
+	<context:property-placeholder location="classpath:db-config.properties"/>
+	
+	<!-- 使用连接池管理数据源 -->
+	<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	<!-- 代替hibernate.cfg.xml中的property和mapping设置 -->
+	<bean name="sessionFactory" 
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+					<list>
+						<value>com/domain/Actor.hbm.xml</value>
+						<value>com/domain/Address.hbm.xml</value>
+						<value>com/domain/Film.hbm.xml</value>
+						<value>com/domain/FilmUser.hbm.xml</value>
+						<value>com/domain/Image.hbm.xml</value>
+						<value>com/domain/Label.hbm.xml</value>
+						<value>com/domain/LoginLog.hbm.xml</value>
+						<value>com/domain/OperateLog.hbm.xml</value>
+						<value>com/domain/Path.hbm.xml</value>
+						<value>com/domain/Privilege.hbm.xml</value>
+						<value>com/domain/Recommend.hbm.xml</value>
+						<value>com/domain/Role.hbm.xml</value>
+						<value>com/domain/Type.hbm.xml</value>
+						<value>com/domain/User.hbm.xml</value>
+					</list>
+		</property>
+	</bean>
+	
+	<!-- 配置声明式事务,采用注解的方式  -->
+	<bean name="txManager" class=" org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 使用注解代替策略和切入点 -->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
+</beans>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.domain.Actor" table="MOVIE_ACTOR" schema="WYD">
+        <id name="actorId" type="java.math.BigDecimal">
+            <column name="ACTORID" precision="22" scale="0" />
+            <generator class="native" />
+        </id>
+        <property name="actorName" type="java.lang.String">
+            <column name="ACTORNAME" length="20" />
+        </property>
+        <property name="nationality" type="java.lang.String">
+            <column name="NATIONALITY" length="20" />
+        </property>
+        <property name="detail" type="java.lang.String">
+            <column name="DETAIL" length="200" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="50" />
+        </property>
+        <set name="films" inverse="true" table="MOVIE_ACTOR_RELATIONSHIP" schema="WYD">
+            <key>
+                <column name="ACTORID" precision="22" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.domain.Film">
+                <column name="FILMID" precision="22" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,61 @@
+***创建数据库表的流程：
+	1. 实体javabean（domain包）
+	2. 相应的映射文件（domain包）
+	3. 添加到hibernate.cfg.xml中
+	4. 运行sessionFactory，创建数据库表（test中SpringTest.java）
+
+***实现增删改查一组功能流程：
+
+1. 做Action相关的准备
+	* Action、jsp、配置
+	具体步骤如下：
+		1），创建 MyAction extends BaseAction. (如UserAction extends BaseAction<User>)
+		2），定义出Action中的方法，要写出方法名、作用、返回值。
+			增删改查所用的6个Action方法的模板。（注：分析功能共有几个请求，在6个action基础上增加其他请求的action方法）
+					/** 列表 */
+					public String list() throws Exception { return "list"; }
+					/** 删除 */
+					public String delete() throws Exception { return "toList"; }
+					/** 添加页面 */
+					public String addUI() throws Exception { return "saveUI"; }
+					/** 添加 */
+					public String add() throws Exception { return "toList"; }
+					/** 修改页面 */
+					public String editUI() throws Exception { return "saveUI"; }
+					/** 修改 */
+					public String edit() throws Exception { return "toList"; }
+		3），创建出所用到的JSP页面（目前还没有具体内容）。
+		4），配置Action：
+			①，在MyAction上写注解 @Controller与@Scope("prototype").
+			②，在strtus.xml中配置这个Action与所用到的result.
+				如：		
+						<action name="user_*" class="userAction" method="{1}">
+							<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
+							<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
+							<result name="toList" type="redirectAction">user_list</result>
+						</action>
+		
+		
+2. 做Service相关的准备
+	* 接口、实现类、配置、声明
+	具体步骤如下：
+		1）创建接口MyService extends DaoSupport.(如UserService extends DaoSupport<User>)
+		2）创建实现类MyServiceImpl extends DaoSupportImpl.
+		3）配置：在MyServiceImpl上写注解：
+			@Service 与 @Transactional
+		4）声明：在BaseAction中声明：
+			@Resource
+			protected MyService myService;
+
+3. 填空
+	* Action方法、Service方法、jsp页面
+	具体步骤如下：
+		1），Action方法——增删改查等方法
+		2），新增的Service方法。
+		3），JSP页面的内容：
+			a，拷贝静态页面中的源代码到JSP中。
+			b，包含进来公共的资源：
+			      <%@ include file=“../public/commons.jspf" %>
+			c，把 ../ 替换为 ${pageContext.request.contextPath}/
+			d，修改页面内容（使用自定义标签）
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+   <!-- 配置资源文件内容 --> 
+   <constant name="struts.i18n.encoding" value="utf8"/>
+   <!-- 禁止动态调用方法 -->
+   <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+   <!-- 自动加载配置文件:不推荐使用 -->  
+   <constant name="struts.configuration.xml.reload" value="false"/>
+   <!-- 开发模式:不推荐使用 -->
+   <constant name="struts.devMode" value="false"/>
+   <!-- 修改后缀 
+   <constant name="struts.action.extension" value="do"/>
+   -->
+   <package name="default" extends="struts-default" namespace="/">    
+   		
+   </package>
+   <!-- 加载其他的配置文件 -->
+   <include file="com/action/team.xml"/>
+</struts>

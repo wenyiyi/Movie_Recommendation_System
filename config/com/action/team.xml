@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+   <package name="team1" extends="default" namespace="/">
+   	 <!-- 首页 -->
+	 <action name="main_*" class="mainAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/mainAction/{1}.jsp</result>
+		<result name="right">/WEB-INF/jsp/mainAction/right.ftl</result>
+	 </action>
+   	
+     <!-- 用户管理 -->
+	 <action name="user_*" class="userAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/userAction/{1}.jsp</result>
+		<result name="register_success">/WEB-INF/jsp/userAction/register_success.jsp</result>
+		<result name="login_success">/WEB-INF/jsp/mainAction/index.jsp</result>
+		<result name="login_fail">/WEB-INF/jsp/userAction/login_fail.jsp</result>
+		<result name="logout">/WEB-INF/jsp/mainAction/index.jsp</result>
+	 </action>
+	 
+	 <!-- 角色管理 -->
+	 <action name="role_*" class="roleAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/roleAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 权限管理 -->
+	 <action name="privilege_*" class="privilegeAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/privilegeAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 演员管理 -->
+	 <action name="actor_*" class="actorAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/actorAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 类型管理 -->
+	 <action name="type_*" class="typeAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/typeAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 电影管理 -->
+	 <action name="film_*" class="filmAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/filmAction/{1}.jsp</result>
+	 	<result type="freemarker" name="showAll">/WEB-INF/jsp/mainAction/right.ftl</result>
+	 	<result type="freemarker" name="showByPage">/WEB-INF/jsp/mainAction/right.ftl</result>
+	 </action>
+	 
+	 <!-- 用户电影管理 -->
+	 <action name="filmUser_*" class="filmUserAction" method="{1}">
+	 </action>
+	 
+	 <!-- 推荐管理 -->
+	 <action name="recommend_*" class="recommendAction" method="{1}">
+		<result type="freemarker" name="left">/WEB-INF/jsp/mainAction/left.ftl</result>
+	 </action>
+	 	 
+	 <!-- 标签管理 -->
+	 <action name="label_*" class="labelAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/labelAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 后台管理 -->
+	 <action name="manager_*" class="managerAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/managerAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 数据管理 -->
+	 <action name="data_*" class="dataAction" method="{1}">
+	 	<result name="{1}">/WEB-INF/jsp/dataAction/{1}.jsp</result>
+	 </action>
+	 
+	 <!-- 定时器管理 -->
+	 <action name="timer_*" class="timerAction" method="{1}">
+	 	<result>/WEB-INF/jsp/mainAction/index.jsp</result>
+	 </action>
+	 
+   </package>
+</struts>
