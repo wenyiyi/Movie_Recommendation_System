@@ -5,4 +5,4 @@
 https://github.com/wenyiyi/Movie_Recommendation_System/blob/master/img/result.JPG
 
 项目后台效果图
-https://github.com/wenyiyi/Movie_Recommendation_System/img/system.JPG 
+https://github.com/wenyiyi/Movie_Recommendation_System/blob/master/img/system.JPG
